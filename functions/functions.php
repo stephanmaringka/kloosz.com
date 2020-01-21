@@ -494,7 +494,7 @@ function total_price(){
         
     }
     
-    echo "Rp" . $total;
+    echo "Rp " . $total;
     
 }
 
