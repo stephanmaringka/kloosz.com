@@ -4,6 +4,43 @@
     include("includes/header.php");
 
 ?>
+  
+<?php
+
+if (isset($_GET['pro_id'])) {
+
+    $product_id = $_GET['pro_id'];
+
+    $get_product = "select * from products where product_id='$product_id'";
+
+    $run_product = mysqli_query($con, $get_product);
+
+    $row_products = mysqli_fetch_array($run_product);
+
+    $p_cat_id = $row_products['p_cat_id'];
+
+    $pro_title = $row_products['product_title'];
+
+    $pro_price = $row_products['product_price'];
+
+    $pro_desc = $row_products['product_desc'];
+
+    $pro_img1 = $row_products['product_img1'];
+
+    $pro_img2 = $row_products['product_img2'];
+
+    $pro_img3 = $row_products['product_img3'];
+
+    $get_p_cat = "select * from product_categories where p_cat_id='$p_cat_id'";
+
+    $run_p_cat = mysqli_query($con, $get_p_cat);
+
+    $row_p_cat = mysqli_fetch_array($run_p_cat);
+
+    $p_cat_title = $row_p_cat['p_cat_title'];
+}
+
+?>
    
    <div id="content">
        <div class="container">
@@ -18,9 +55,9 @@
                    </li>
                    
                    <li>
-                       <a href="shop.php?p_cat=<?php echo $p_cat_id; ?>"><?php echo $p_cat_title; ?></a>
+                       <a href="shop.php?p_cat=<?php echo $p_cat_id; ?>"></a>
                    </li>
-                   <li> <?php echo $pro_title; ?> </li>
+                   <li>  </li>
                </ul>
                
            </div>
