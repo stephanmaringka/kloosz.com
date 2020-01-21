@@ -107,39 +107,32 @@
     <div id="advantages">
         <div class="container">
             <div class="same-height-row">
+               
+               <?php 
+           
+           $get_boxes = "select * from boxes_section";
+           $run_boxes = mysqli_query($con,$get_boxes);
+
+           while($run_boxes_section=mysqli_fetch_array($run_boxes)){
+
+            $box_id = $run_boxes_section['box_id'];
+            $box_title = $run_boxes_section['box_title'];
+            $box_desc = $run_boxes_section['box_desc'];
+           
+           ?>
+               
                 <div class="col-sm-4">
                     <div class="box same-height">
                         <div class="icon">
                             <i class="fa fa-heart"></i>
                         </div>
-                        <h3><a href="#">
-                                We Love Our Costumer
-                            </a></h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore totam sint, maxime, eum explicabo modi alias doloremque culpa.</p>
+                        <h3><a href="#"><?php echo $box_title; ?></a></h3>
+                        <p> <?php echo $box_desc; ?> </p>
                     </div>
                 </div>
-                <div class="col-sm-4">
-                    <div class="box same-height">
-                        <div class="icon">
-                            <i class="fa fa-tag"></i>
-                        </div>
-                        <h3><a href="#">
-                                Best Prices
-                            </a></h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut impedit officia ab repellat ullam similique minus explicabo facere accusantium.</p>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="box same-height">
-                        <div class="icon">
-                            <i class="fa fa-thumbs-up"></i>
-                        </div>
-                        <h3><a href="#">
-                                100% Original Products
-                            </a></h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates esse culpa numquam iste dignissimos.</p>
-                    </div>
-                </div>
+                
+                <?php    } ?>
+                
             </div>
         </div>
     </div>
