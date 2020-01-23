@@ -28,6 +28,8 @@
         
         $cat = $row_edit['cat_id'];
         
+        $m_id = $row_edit['manufacturer_id'];
+        
         $p_image1 = $row_edit['product_img1'];
         
         $p_image2 = $row_edit['product_img2'];
@@ -41,6 +43,15 @@
         $p_desc = $row_edit['product_desc'];
         
     }
+        $get_manufacturer = "select * from manufacturers where manufacturer_id='$m_id'";
+        
+        $run_manufacturer = mysqli_query($con,$get_manufacturer);
+        
+        $row_manufacturer = mysqli_fetch_array($run_manufacturer);
+        
+        $manufacturer_id = $row_manufacturer['manufacturer_id'];
+        
+        $manufacturer_title = $row_manufacturer['manufacturer_title'];
         
         $get_p_cat = "select * from product_categories where p_cat_id='$p_cat'";
         
@@ -68,7 +79,8 @@
     <title> Insert Products </title>
 </head>
 <body>
-    
+
+<!-- row -->   
 <div class="row">
     
     <div class="col-lg-12">
@@ -86,7 +98,9 @@
     </div>
     
 </div>
-       
+<!-- row end -->
+
+<!-- row -->       
 <div class="row">
     
     <div class="col-lg-12">
@@ -103,10 +117,12 @@
                
            </div>
            
+           <!-- panel body -->
            <div class="panel-body">
                
                <form method="post" class="form-horizontal" enctype="multipart/form-data">
                    
+                   <!-- form-group product title -->
                    <div class="form-group">
                        
                       <label class="col-md-3 control-label"> Product Title </label> 
@@ -118,7 +134,49 @@
                       </div>
                        
                    </div>
+                   <!-- form-group product title end -->
                    
+                   <!-- form-group product category -->
+                   <div class="form-group">
+                       
+                      <label class="col-md-3 control-label"> Manufacturer </label> 
+                      
+                      <div class="col-md-6">
+                          
+                          <select name="manufacturer" class="form-control">
+                             
+                              <option selected disabled value="Select Manufacturer">Select Manufacturer</option>
+                              
+                              <option selected value="<?php echo $manufacturer_id; ?>"> <?php echo $manufacturer_title; ?> </option>
+                              
+                              <?php 
+                              
+                              $get_manufacturer = "select * from manufacturers";
+                              $run_manufacturer = mysqli_query($con,$get_manufacturer);
+                              
+                              while ($row_manufacturer=mysqli_fetch_array($run_manufacturer)){
+                                  
+                                  $manufacturer_id = $row_manufacturer['manufacturer_id'];
+                                  $manufacturer_title = $row_manufacturer['manufacturer_title'];
+                                  
+                                  echo "
+                                  
+                                  <option value='$manufacturer_id'> $manufacturer_title </option>
+                                  
+                                  ";
+                                  
+                              }
+                              
+                              ?>
+                              
+                          </select>
+                          
+                      </div>
+                       
+                   </div>
+                   <!-- form-group product category end -->
+                   
+                   <!-- form-group product category -->
                    <div class="form-group">
                        
                       <label class="col-md-3 control-label"> Product Category </label> 
@@ -126,6 +184,8 @@
                       <div class="col-md-6">
                           
                           <select name="product_cat" class="form-control">
+                             
+                              <option selected disabled value="Select Product Category">Select Product Category</option>
                               
                               <option value="<?php echo $p_cat; ?>"> <?php echo $p_cat_title; ?> </option>
                               
@@ -154,7 +214,9 @@
                       </div>
                        
                    </div>
+                   <!-- form-group product category end -->
                    
+                   <!-- form-group category -->
                    <div class="form-group">
                        
                       <label class="col-md-3 control-label"> Category </label> 
@@ -162,6 +224,8 @@
                       <div class="col-md-6">
                           
                           <select name="cat" class="form-control">
+                              
+                              <option selected disabled value="Select Category">Select Category</option>
                               
                               <option value="<?php echo $cat; ?>"> <?php echo $cat_title; ?> </option>
                               
@@ -190,14 +254,16 @@
                       </div>
                        
                    </div>
+                   <!-- form-group category end -->
                    
+                   <!-- form-group product image 1 -->
                    <div class="form-group">
                        
                       <label class="col-md-3 control-label"> Product Image 1 </label> 
                       
                       <div class="col-md-6">
                           
-                          <input name="product_img1" type="file" class="form-control" required>
+                          <input name="product_img1" type="file" class="form-control">
                           
                           <br>
                           
@@ -206,7 +272,9 @@
                       </div>
                        
                    </div>
+                   <!-- form-group product image 1 end -->
                    
+                   <!-- form-group product image 2 -->
                    <div class="form-group">
                        
                       <label class="col-md-3 control-label"> Product Image 2 </label> 
@@ -222,7 +290,9 @@
                       </div>
                        
                    </div>
+                   <!-- form-group product image 2 end -->
                    
+                   <!-- form-group product image 3 -->
                    <div class="form-group">
                        
                       <label class="col-md-3 control-label"> Product Image 3 </label> 
@@ -238,7 +308,9 @@
                       </div>
                        
                    </div>
+                   <!-- form-group product image 3 en -->
                    
+                   <!-- form-group product price -->
                    <div class="form-group">
                        
                       <label class="col-md-3 control-label"> Product Price </label> 
@@ -250,7 +322,9 @@
                       </div>
                        
                    </div>
+                   <!-- form-group product price end -->
                    
+                   <!-- form-group product keywords -->
                    <div class="form-group">
                        
                       <label class="col-md-3 control-label"> Product Keywords </label> 
@@ -262,7 +336,9 @@
                       </div>
                        
                    </div>
+                   <!-- form-group product keywords end -->
                    
+                   <!-- form-group product desc -->
                    <div class="form-group">
                        
                       <label class="col-md-3 control-label"> Product Desc </label> 
@@ -278,7 +354,9 @@
                       </div>
                        
                    </div>
+                   <!-- form-group product desc end -->
                    
+                   <!-- form-group -->
                    <div class="form-group">
                        
                       <label class="col-md-3 control-label"></label> 
@@ -290,16 +368,19 @@
                       </div>
                        
                    </div>
+                   <!-- form-group end -->
                    
                </form>
                
            </div>
+           <!-- panel body end -->
             
         </div>
         
     </div>
     
 </div>
+<!-- row end -->
    
     <script src="js/tinymce/tinymce.min.js"></script>
     <script>tinymce.init({ selector:'textarea'});</script>
@@ -314,31 +395,54 @@ if(isset($_POST['update'])){
     $product_title = $_POST['product_title'];
     $product_cat = $_POST['product_cat'];
     $cat = $_POST['cat'];
+    $manufacturer_id = $_POST['manufacturer'];
     $product_price = $_POST['product_price'];
     $product_keywords = $_POST['product_keywords'];
     $product_desc = $_POST['product_desc'];
     
-    $product_img1 = $_FILES['product_img1']['name'];
-    $product_img2 = $_FILES['product_img2']['name'];
-    $product_img3 = $_FILES['product_img3']['name'];
-    
-    $temp_name1 = $_FILES['product_img1']['tmp_name'];
-    $temp_name2 = $_FILES['product_img2']['tmp_name'];
-    $temp_name3 = $_FILES['product_img3']['tmp_name'];
-    
-    move_uploaded_file($temp_name1,"product_images/$product_img1");
-    move_uploaded_file($temp_name2,"product_images/$product_img2");
-    move_uploaded_file($temp_name3,"product_images/$product_img3");
-    
-    $update_product = "update products set p_cat_id='$product_cat',cat_id='$cat',date=NOW(),product_title='$product_title',product_img1='$product_img1',product_img2='$product_img2',product_img3='$product_img3',product_keywords='$product_keywords',product_desc='$product_desc',product_price='$product_price' where product_id='$p_id'";
-    
-    $run_product = mysqli_query($con,$update_product);
-    
-    if($run_product){
+    if(is_uploaded_file($_FILES['file']['tmp_name'])){
         
-       echo "<script>alert('Your product has been updated Successfully')</script>"; 
+        // work for upload / update image
         
-       echo "<script>window.open('index.php?view_products','_self')</script>"; 
+        $product_img1 = $_FILES['product_img1']['name'];
+        $product_img2 = $_FILES['product_img2']['name'];
+        $product_img3 = $_FILES['product_img3']['name'];
+
+        $temp_name1 = $_FILES['product_img1']['tmp_name'];
+        $temp_name2 = $_FILES['product_img2']['tmp_name'];
+        $temp_name3 = $_FILES['product_img3']['tmp_name'];
+
+        move_uploaded_file($temp_name1,"product_images/$product_img1");
+        move_uploaded_file($temp_name2,"product_images/$product_img2");
+        move_uploaded_file($temp_name3,"product_images/$product_img3");
+
+        $update_product = "update products set p_cat_id='$product_cat',cat_id='$cat',manufacturer_id='$manufacturer_id',date=NOW(),product_title='$product_title',product_img1='$product_img1',product_img2='$product_img2',product_img3='$product_img3',product_keywords='$product_keywords',product_desc='$product_desc',product_price='$product_price' where product_id='$p_id'";
+
+        $run_product = mysqli_query($con,$update_product);
+
+        if($run_product){
+
+           echo "<script>alert('Your product has been updated Successfully')</script>"; 
+
+           echo "<script>window.open('index.php?view_products','_self')</script>"; 
+        
+    }
+        
+    }else{
+        
+        // work where no update image
+        
+            $update_product = "update products set p_cat_id='$product_cat',cat_id='$cat',manufacturer_id='$manufacturer_id',date=NOW(),product_title='$product_title',product_keywords='$product_keywords',product_desc='$product_desc',product_price='$product_price' where product_id='$p_id'";
+
+            $run_product = mysqli_query($con,$update_product);
+
+            if($run_product){
+
+                echo "<script>alert('Your product has been updated Successfully')</script>"; 
+
+                echo "<script>window.open('index.php?view_products','_self')</script>";
+
+        }
         
     }
     
