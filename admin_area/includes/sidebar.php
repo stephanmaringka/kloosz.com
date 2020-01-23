@@ -119,7 +119,26 @@ if(!isset($_SESSION['admin_email'])){
                 </ul>
 
             </li>
-
+            
+            <li>
+                <a href="#" data-toggle="collapse" data-target="#manufacturer">
+                        
+                        <i class="fa fa-fw fa-star"></i> Manufacturer
+                        <i class="fa fa-fw fa-caret-down"></i>
+                        
+                </a>
+                
+                <ul id="manufacturer" class="collapse">
+                    <li>
+                        <a href="index.php?insert_manufacturer"> Insert Manufacturer </a>
+                    </li>
+                    <li>
+                        <a href="index.php?view_manufacturers"> View Manufacturer </a>
+                    </li>
+                </ul>
+                
+            </li>
+            
             <li>
                 <a href="#" data-toggle="collapse" data-target="#p_cat">
 
