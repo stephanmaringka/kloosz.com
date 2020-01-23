@@ -132,7 +132,7 @@
 <div id="copyright">
     <div class="" container>
         <div class="col-md-12">
-            <p class="align-center">&copy; 2019 All Rights Reserved by PT Philoshop Digital Partner</p>
+            <p class="align-center">&copy; 2019 All Rights Reserved by Hasnel Tech Indonesia</p>
         </div>
     </div>
 </div>
