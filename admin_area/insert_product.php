@@ -21,7 +21,8 @@
 </head>
 
 <body>
-
+    
+    <!-- row -->
     <div class="row">
         <div class="col-lg-12">
             <ol class="breadcrumb">
@@ -31,7 +32,9 @@
             </ol>
         </div>
     </div>
+    <!-- row end -->
 
+    <!-- row -->
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
@@ -40,8 +43,12 @@
                         <i class="fa fa-money fa-fw"></i> Insert Product
                     </h3>
                 </div>
+                
+                <!-- panel body -->
                 <div class="panel-body">
                     <form method="post" class="form-horizontal" enctype="multipart/form-data">
+                       
+                        <!-- form group product title -->
                         <div class="form-group">
                             <label class="col-md-3 control-label">
                                 Product Title
@@ -50,13 +57,48 @@
                                 <input name="product_title" type="text" class="form-control" required>
                             </div>
                         </div>
+                        <!-- form group product title end -->
+                        
+                        <!-- form group manufacturer -->
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">
+                                Manufacturer
+                            </label>
+                            <div class="col-md-6">
+                                <select name="manufacturer" class="form-control">
+                                    <option selected disabled>Select a Manufacturer</option>
+
+                                    <?php 
+                                
+                                $get_manufacturer = "select * from manufacturers";
+                                $run_manufacturer = mysqli_query($con,$get_manufacturer);
+                                
+                                while ($row_manufacturer=mysqli_fetch_array($run_manufacturer)){
+                                    $manufacturer_id = $row_manufacturer['manufacturer_id'];
+                                    $manufacturer_title = $row_manufacturer['manufacturer_title'];
+                                    
+                                    echo "
+                                    
+                                    <option value='$manufacturer_id'> $manufacturer_title </option>
+                                    
+                                    ";
+                                    
+                                }
+                                
+                                ?>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- form group manufacturer end -->
+                        
+                        <!-- form group product category -->
                         <div class="form-group">
                             <label class="col-md-3 control-label">
                                 Product Category
                             </label>
                             <div class="col-md-6">
                                 <select name="product_cat" class="form-control">
-                                    <option> Select a Category Product </option>
+                                    <option selected disabled>Select a Product Category</option>
 
                                     <?php 
                                 
@@ -79,14 +121,16 @@
                                 </select>
                             </div>
                         </div>
+                        <!-- form group product category end -->
 
+                        <!-- form group category -->
                         <div class="form-group">
                             <label class="col-md-3 control-label">
                                 Category
                             </label>
                             <div class="col-md-6">
                                 <select name="cat" class="form-control">
-                                    <option> Select a Category </option>
+                                    <option selected disabled>Select a Category</option>
 
                                     <?php 
                               
@@ -111,6 +155,9 @@
                                 </select>
                             </div>
                         </div>
+                        <!-- form group category end -->
+                        
+                        <!-- form group -->
                         <div class="form-group">
                             <label class="col-md-3 control-label">
                                 Product Image 1
@@ -119,6 +166,9 @@
                                 <input name="product_img1" type="file" class="form-control" required>
                             </div>
                         </div>
+                        <!-- form group end -->
+                        
+                        <!-- form group -->
                         <div class="form-group">
                             <label class="col-md-3 control-label">
                                 Product Image 2
@@ -127,6 +177,9 @@
                                 <input name="product_img2" type="file" class="form-control">
                             </div>
                         </div>
+                        <!-- form group end -->
+                        
+                        <!-- form group -->
                         <div class="form-group">
                             <label class="col-md-3 control-label">
                                 Product Image 3
@@ -135,6 +188,9 @@
                                 <input name="product_img3" type="file" class="form-control">
                             </div>
                         </div>
+                        <!-- form group end -->
+                        
+                        <!-- form group -->
                         <div class="form-group">
                             <label class="col-md-3 control-label">
                                 Product Price
@@ -143,6 +199,9 @@
                                 <input name="product_price" type="text" class="form-control" required>
                             </div>
                         </div>
+                        <!-- form group end -->
+                        
+                        <!-- form group -->
                         <div class="form-group">
                             <label class="col-md-3 control-label">
                                 Product Keywords
@@ -151,6 +210,9 @@
                                 <input name="product_keywords" type="text" class="form-control" required>
                             </div>
                         </div>
+                        <!-- form group end -->
+                        
+                        <!-- form group -->
                         <div class="form-group">
                             <label class="col-md-3 control-label">
                                 Product Desc
@@ -159,17 +221,23 @@
                                 <textarea name="product_desc" cols="19" rows="6" class="form-control"></textarea>
                             </div>
                         </div>
+                        <!-- form group end -->
+                        
+                        <!-- form group -->
                         <div class="form-group">
                             <label class="col-md-3 control-label"></label>
                             <div class="col-md-6">
                                 <input name="submit" value="Insert Product" type="submit" class="btn btn-primary form-control">
                             </div>
                         </div>
+                        <!-- form group end -->
                     </form>
                 </div>
+                <!-- panel body end -->
             </div>
         </div>
     </div>
+    <!-- row end -->
 
 
     <script src="js/jquery-331.min.js"></script>
@@ -191,6 +259,7 @@ if(isset($_POST['submit'])){
     $product_title = $_POST['product_title'];
     $product_cat = $_POST['product_cat'];
     $cat = $_POST['cat'];
+    $manufacturer_id = $_POST['manufacturer'];
     $product_price = $_POST['product_price'];
     $product_keywords = $_POST['product_keywords'];
     $product_desc = $_POST['product_desc'];
@@ -207,7 +276,7 @@ if(isset($_POST['submit'])){
     move_uploaded_file($temp_name2,"product_images/$temp_name2");
     move_uploaded_file($temp_name3,"product_images/$temp_name3");
     
-    $insert_product = "insert into products (p_cat_id,cat_id,date,product_title,product_img1,product_img2,product_img3,product_price,product_keywords,product_desc) values('$product_cat','$cat',NOW(),'$product_title','$product_img1','$product_img2','$product_img3','$product_price','$product_keywords','$product_desc')";
+    $insert_product = "insert into products (p_cat_id,cat_id,manufacturer_id,date,product_title,product_img1,product_img2,product_img3,product_price,product_keywords,product_desc) values('$product_cat','$cat','$manufacturer_id',NOW(),'$product_title','$product_img1','$product_img2','$product_img3','$product_price','$product_keywords','$product_desc')";
     
     $run_product = mysqli_query($con,$insert_product);
     
