@@ -24,7 +24,9 @@
         
         $cat_title = $row_edit['cat_title'];
         
-        $cat_desc = $row_edit['cat_desc'];
+        $cat_top = $row_edit['cat_top'];
+        
+        $cat_image = $row_edit['cat_image'];
         
     }
 
@@ -34,9 +36,9 @@
     <div class="col-lg-12">
         <ol class="breadcrumb">
             <li>
-                
+
                 <i class="fa fa-dashboard"></i> Dashboard / Edit Category
-                
+
             </li>
         </ol>
     </div>
@@ -47,62 +49,94 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">
-                
+
                     <i class="fa fa-pencil fa-fw"></i> Edit Category
-                
+
                 </h3>
             </div>
-            
+
             <div class="panel-body">
-                <form action="" class="form-horizontal" method="post">
+
+                <form action="" class="form-horizontal" method="post" enctype="multipart/form-data">
                     <div class="form-group">
-                    
+
                         <label for="" class="control-label col-md-3">
-                        
-                            Category Title 
-                        
+
+                            Category Title
+
                         </label>
-                        
+
                         <div class="col-md-6">
-                        
-                            <input value=" <?php echo $cat_title; ?> " name="cat_title" type="text" class="form-control">
-                        
+
+                            <input value="<?php echo $cat_title ?>" name="cat_title" type="text" class="form-control">
+
                         </div>
-                    
+
                     </div>
+
                     <div class="form-group">
-                    
+
                         <label for="" class="control-label col-md-3">
-                        
-                            Category Description 
-                        
-                        </label> 
-                        
-                        <div class="col-md-6">
-                        
-                            <textarea type='text' name="cat_desc" class="form-control"><?php echo $cat_desc; ?></textarea>
-                        
-                        </div>
-                    
-                    </div>
-                    <div class="form-group">
-                    
-                        <label for="" class="control-label col-md-3"> 
-                        
-                             
-                        
+
+                            Choose as Top Manufacturer
+
                         </label>
-                        
+
                         <div class="col-md-6">
-                        
-                            <input value="Update" name="update" type="submit" class="form-control btn btn-primary">
-                        
+
+                            <input name="cat_top" type="radio" value="yes" <?php
+                                
+                                    if($cat_top=='no'){}else{echo "checked='checked'";}
+        
+                                ?>>
+                            <label>Yes</label>
+
+                            <input name="cat_top" type="radio" value="no" <?php 
+                                   
+                                    if($cat_top=='no'){echo "checked='checked'";}   
+                                   
+                                ?>>
+                            <label>No</label>
                         </div>
-                    
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="" class="control-label col-md-3">
+
+                            Category Image
+
+                        </label>
+
+                        <div class="col-md-6">
+
+                            <input type="file" name="cat_image" class="form-control">
+
+                            <br>
+
+                            <img width="70" height="70" src="other_images/<?php echo $cat_image; ?>" alt="<?php echo $cat_image; ?>">
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="" class="control-label col-md-3">
+
+                        </label>
+
+                        <div class="col-md-6">
+
+                            <input value="Update Category" name="udpate" type="submit" class="form-control btn btn-primary">
+
+                        </div>
+
                     </div>
                 </form>
             </div>
-            
+
         </div>
     </div>
 </div>
@@ -113,24 +147,46 @@
               
               $cat_title = $_POST['cat_title'];
               
-              $cat_desc = $_POST['cat_desc'];
+              $cat_top = $_POST['cat_top'];
               
-              $update_cat = "update categories set cat_title='$cat_title',cat_desc='$cat_desc' where cat_id='$cat_id'";
-              
-              $run_cat = mysqli_query($con,$update_cat);
-              
-              if($run_cat){
+              if(is_uploaded_file($_FILES['cat_image']['tmp_name'])){
                   
-                  echo "<script>alert('Your Category Has Been Updated')</script>";
+                  $cat_image = $_POST['cat_image']['name'];
+              
+                  $temp_name = $_FILES['cat_image']['tmp_name'];
                   
-                  echo "<script>window.open('index.php?view_cats','_self')</script>";
+                  //move_uploaded_file($temp_name,"other_images/$cat_image");
+              
+                  $update_cat = "update categories set cat_title='$cat_title',cat_top='$cat_top',cat_image='$cat_image' where cat_id='$cat_id'";
+              
+                  $run_cat = mysqli_query($con,$update_cat);
+                  
+                  if($run_cat){
+                      
+                      echo "<script>alert('Your category has been updated')</script>";
+                          
+                      echo "<script>window.open('index.php?view_cats','_self')</script>";
+                      
+                  }
+                  
+              }else{
+                  
+                 $update_cat = "update categories set cat_title='$cat_title',cat_top='$cat_top' where cat_id='$cat_id'";
+              
+                  $run_cat = mysqli_query($con,$update_cat);
+                  
+                  if($run_cat){
+                      
+                      echo "<script>alert('Your category has been updated')</script>";
+                          
+                      echo "<script>window.open('index.php?view_cats','_self')</script>";
+                      
+                  } 
                   
               }
               
-          }
+            }
 
 ?>
 
-
-
-<?php } ?> 
+<?php } ?>
