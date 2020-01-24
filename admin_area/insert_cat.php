@@ -32,7 +32,7 @@
             </div>
             
             <div class="panel-body">
-                <form action="" class="form-horizontal" method="post">
+                <form action="" class="form-horizontal" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                     
                         <label for="" class="control-label col-md-3">
@@ -48,21 +48,44 @@
                         </div>
                     
                     </div>
+                    
                     <div class="form-group">
                     
-                        <label for="" class="control-label col-md-3"> 
+                        <label for="" class="control-label col-md-3">
                         
-                            Category Description 
+                            Choose as Top Manufacturer
                         
                         </label>
                         
                         <div class="col-md-6">
                         
-                            <textarea type='text' name="cat_desc" id="" cols="30" rows="10" class="form-control"></textarea>
+                            <input name="cat_top" type="radio" value="yes">
+                            <label>Yes</label>
+                            
+                            <input name="cat_top" type="radio" value="no">
+                            <label>No</label>
                         
                         </div>
                     
                     </div>
+                    
+                    <div class="form-group">
+                    
+                        <label for="" class="control-label col-md-3">
+                        
+                            Category Image
+                        
+                        </label>
+                        
+                        <div class="col-md-6">
+                        
+                            <input type="file" name="cat_image" class="form-control">
+                        
+                        </div>
+                    
+                    </div>
+                    
+                    
                     <div class="form-group">
                     
                         <label for="" class="control-label col-md-3"> 
@@ -73,7 +96,7 @@
                         
                         <div class="col-md-6">
                         
-                            <input value="Submit" name="submit" type="submit" class="form-control btn btn-primary">
+                            <input value="Submit Category" name="submit" type="submit" class="form-control btn btn-primary">
                         
                         </div>
                     
@@ -91,9 +114,15 @@
               
               $cat_title = $_POST['cat_title'];
               
-              $cat_desc = $_POST['cat_desc'];
+              $cat_top = $_POST['cat_top'];
               
-              $insert_cat = "insert into categories (cat_title,cat_desc) values ('$cat_title','$cat_desc')";
+              $cat_image = $_FILES['cat_image']['name'];
+              
+              $temp_name = $_FILES['cat_image']['tmp_name'];
+              
+              move_uploaded_file($temp_name,"other_images/$cat_image");
+              
+              $insert_cat = "insert into categories (cat_title,cat_top,cat_image) values ('$cat_title','$cat_top','$cat_image')";
               
               $run_cat = mysqli_query($con,$insert_cat);
               
