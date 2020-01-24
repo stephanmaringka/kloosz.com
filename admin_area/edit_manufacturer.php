@@ -175,7 +175,7 @@
 
             if($run_manufacturer){
         
-                echo "<script>alert('Your manufacturer has beend upadted')</script>";
+                echo "<script>alert('Your manufacturer has been upadted')</script>";
                 
                 echo "<script>window.open('index.php?view_manufacturers','_self')</script>";
          
