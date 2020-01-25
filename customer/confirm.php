@@ -25,7 +25,7 @@ if(isset($_GET['order_id'])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Melisan</title>
+    <title>Kloosz</title>
     <link rel="stylesheet" href="styles/bootstrap-337.min.css">
     <link rel="stylesheet" href="font-awsome/css/font-awesome.min.css">
     <link rel="stylesheet" href="styles/style.css">
@@ -111,8 +111,8 @@ if(isset($_GET['order_id'])){
 
                 <a href="../index.php" class="navbar-brand home">
 
-                    <img src="images/melisanlogo1.jpg" alt="melisan1 Logo" class="hidden-xs">
-                    <img src="images/melisanlogo2.jpg" alt="melisan2 Logo Mobile" class="visible-xs">
+                    <img src="images/KLOOSZ1.png" alt="kloosz1 Logo" class="hidden-xs">
+                    <img src="images/KLOOSZ2.png" alt="kloosz2 Logo Mobile" class="visible-xs">
 
                 </a>
 
