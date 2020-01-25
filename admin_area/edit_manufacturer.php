@@ -161,26 +161,27 @@
             
             if($run_manufacturer){
         
-                echo "<script>alert('Your manufacturer has beend upadted')</script>";
+                echo "<script>alert('Your manufacturer has been updated')</script>";
                 
                 echo "<script>window.open('index.php?view_manufacturers','_self')</script>";
             
             }        
                     
         }else{
-            
-            $update_manufacturer = "update manufacturers set manufacturers_title='$manufacturer_name',manufacturer_top='$manufacturer_top' where manufacturer_id='$m_id'";
-        
-            $run_manufacturer = mysqli_query($con,$update_manufacturer);
-
-            if($run_manufacturer){
-        
-                echo "<script>alert('Your manufacturer has been upadted')</script>";
-                
-                echo "<script>window.open('index.php?view_manufacturers','_self')</script>";
-         
-            }        
-        }
+                  
+                 $update_manufacturer = "update manufacturers set manufacturer_title='$manufacturer_name',manufacturer_top='$manufacturer_top' where manufacturer_id='$m_id'";
+              
+                  $run_manufacturer = mysqli_query($con,$update_manufacturer);
+                  
+                  if($run_manufacturer){
+                      
+                      echo "<script>alert('Your manufacturer has been updated')</script>";
+                          
+                      echo "<script>window.open('index.php?view_manufacturers','_self')</script>";
+                      
+                  } 
+                  
+              }
         
     }
 
