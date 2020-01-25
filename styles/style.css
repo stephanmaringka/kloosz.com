@@ -572,3 +572,8 @@ color: #4fbfa8;
 .checkbox-primary input[type='checkbox']:checked + span::before{
     color: #fff;
 }
+
+.product a img.img-responsive{
+    max-height: 252px;
+    width: 100%;
+}
