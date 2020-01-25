@@ -160,7 +160,7 @@
         <!-- Panel Body 1 -->
         <div class="panel-body">
             <div class="input-group">
-                <input type="text" class="form-control" id="dev-table-filter" data-filters="#dev-manufacturer" data-action="filter" placeholder="Filter Categories">
+                <input type="text" class="form-control" id="dev-table-filter" data-filters="#dev-cat" data-action="filter" placeholder="Filter Categories">
 
                 <a class="input-group-addon">
 
@@ -176,7 +176,7 @@
     <!-- Panel Body 2 -->
     <div class="panel-body scroll-menu">
 
-        <ul class="nav nav-pills nav-stacked category-menu" id="dev-manufacturer">
+        <ul class="nav nav-pills nav-stacked category-menu" id="dev-p-cat">
 
             <?php 
                 
