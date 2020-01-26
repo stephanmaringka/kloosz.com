@@ -48,7 +48,7 @@
             
         </div>
         
-        <div id="wait" class="wait" style="position:absolute;top:40%;left:45%;padding: 200px 100px 100px 100px"></div>
+        <div id="wait" style="position:absolute;top:40%;left:45%;padding: 200px 100px 100px 100px"></div>
 
     </div>
 </div>
@@ -135,6 +135,178 @@
         });
        
        });
+
+</script>
+
+<script>
+
+    $(document).ready(function(){
+
+            // getProducts Function //
+
+            function getProducts(){
+
+                // Manufacturers //
+
+                var sPath = '';
+                var aInputs = $('li').find('.get_manufacturer');
+                var aKeys = Array();
+                var aValues = Array();
+
+                iKey = 0;
+
+                $.each(aInputs, function(key, oInput){
+
+                    if(oInput.checked){
+
+                        aKeys[iKey] = oInput.value
+
+                    };
+
+                    iKey++;
+
+                });
+
+                if(aKeys.length>0){
+
+                    var sPath = '';
+
+                    for(var i = 0; i < aKeys.length; i++){
+
+                        sPath = sPath + 'man[]=' + aKeys[i]+'&';
+
+                    }
+
+                }
+
+                // Manufacturers End //
+
+                // Product Categories //
+
+                var aInputs = Array();
+                var aInputs = $('li').find('.get_p_cat');
+                var aKeys = Array();
+                var aValues = Array();
+
+                iKey = 0;
+
+                $.each(aInputs, function(key, oInput){
+
+                    if(oInput.checked){
+
+                        aKeys[iKey] = oInput.value
+
+                    };
+
+                    iKey++;
+
+                });
+
+                if(aKeys.length>0){
+
+                    var sPath = '';
+
+                    for(var i = 0; i < aKeys.length; i++){
+
+                        sPath = sPath + 'p_cat[]=' + aKeys[i]+'&';
+
+                    }
+
+                }
+
+                // Product Categories end
+
+                // Categories
+
+                var aInputs = Array();
+                var aInputs = $('li').find('.get_cat');
+                var aKeys = Array();
+                var aValues = Array();
+
+                iKey = 0;
+
+                $.each(aInputs, function(key, oInput){
+
+                    if(oInput.checked){
+
+                        aKeys[iKey] = oInput.value
+
+                    };
+
+                    iKey++;
+
+                });
+
+                if(aKeys.length>0){
+
+                    var sPath = '';
+
+                    for(var i = 0; i < aKeys.length; i++){
+
+                        sPath = sPath + 'cat[]=' + aKeys[i]+'&';
+
+                    }
+
+                }
+
+                // Categories end
+
+                // Loader    
+
+                $('#wait').html('<img src="images/load.gif"');
+
+                // Loader end
+
+                $.ajax({
+
+                    url:"load.php",
+                    method:"POST",
+
+                    data: sPath+'sAction=getProducts',
+
+                    success:function(data){
+
+                        $('#products').html('');
+                        $('#products').html(data);
+                        $('#wait').empty();
+
+                    }
+
+                });
+
+                $.ajax({
+
+                    url:"load.php",
+                    method:"POST",
+
+                    data: sPath+'sAction=getPaginator',
+
+                    success:function(data){
+
+                        $('.pagination').html('');
+                        $('.pagination').html(data);
+
+                    }
+
+                });
+
+            }
+
+            // getProducts end
+
+            $('.get_manufacturer').click(function(){
+                getProducts();
+            });
+
+            $('.get_p_cat').click(function(){
+                getProducts();
+            });
+
+            $('.get_cat').click(function(){
+                getProducts();
+            });
+
+        });
 
 </script>
 
