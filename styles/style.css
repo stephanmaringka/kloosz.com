@@ -577,3 +577,54 @@ color: #4fbfa8;
     max-height: 252px;
     width: 100%;
 }
+
+/* styling label */
+.label{
+    color: #000;
+    text-transform: uppercase;
+    font-size: 18px;
+    font-weight: 700;
+    position: absolute;
+    top: 10px;
+    padding-left: 51px;
+    z-index: 20;
+}
+
+.label .labelBackground{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.label .theLabel{
+    position: relative;
+    width: 100px;
+    padding: 6px 50px 6px 15px;
+    margin: 10px 50px 10px -71px;
+    color: #fff;
+    text-shadow: 3px 3px 3px grey;
+}
+
+.label.sale .theLabel{
+    background: #db001e;
+}
+
+.label.new .theLabel{
+    background: #337ab7;
+}
+
+.label .theLabel:before,
+.label .theLabel:after{
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+}
+
+.label .theLabel:after{
+    left: 0;
+    top: 100%;
+    border-width: 5px 10px;
+    border-style: solid;
+    border-color: #000 #000 transparent transparent;
+}
