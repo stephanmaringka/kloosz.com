@@ -327,7 +327,7 @@ function getProducts(){
     }
     
     $start_from = ($page-1) * $per_page;
-    $sLimit = "order by 1 DESC LIMIT $start_from,$per_page";
+    $sLimit = " order by 1 DESC LIMIT $start_from,$per_page";
     $sWhere = (count($aWhere)>0?' WHERE '.implode(' or ',$aWhere): '').$sLimit;
     $get_products = "select * from products ".$sWhere;
     $run_products = mysqli_query($db,$get_products);
