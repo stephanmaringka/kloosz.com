@@ -53,33 +53,33 @@ include("functions/functions.php");
                 <ul class="menu">
 
                     <li>
-                        <a href="customer_register.php">Register</a>
-                    </li>
-                    <li>
-                        <a href="customer/my_account.php">My Account</a>
-                    </li>
-                    <li>
-                        <a href="cart.php">Go To Cart</a>
-                    </li>
-                    <li>
-                        <a href="checkout.php">
-                            
-                            <?php 
-                   
-                            if(!isset($_SESSION['customer_email'])){
+                       <a href="customer_register.php">Register</a>
+                   </li>
+                   <li>
+                       <a href="checkout.php">My Account</a>
+                   </li>
+                   <li>
+                       <a href="cart.php">Go To Cart</a>
+                   </li>
+                   <li>
+                       <a href="checkout.php">
+                           
+                           <?php 
+                           
+                           if(!isset($_SESSION['customer_email'])){
                        
                                 echo "<a href='checkout.php'> Login </a>";
-                       
-                                }else{
-                       
-                                echo "<a href='logout.php'> Logout </a>";
-                       
-                                }
-                   
-                            ?>
-                            
-                        </a>
-                    </li>
+
+                               }else{
+
+                                echo " <a href='logout.php'> Logout </a> ";
+
+                               }
+                           
+                           ?>
+                           
+                       </a>
+                   </li>
 
                 </ul>
 
@@ -99,8 +99,8 @@ include("functions/functions.php");
 
                 <a href="index.php" class="navbar-brand home">
 
-                    <img src="images/KLOOSZ1.png" alt="melisan1 Logo" class="hidden-xs">
-                    <img src="images/KLOOSZ2.png" alt="melisan2 Logo Mobile" class="visible-xs">
+                    <img src="images/KLOOSZ1.png" alt="kloosz1 Logo" class="hidden-xs">
+                    <img src="images/KLOOSZ2.png" alt="kloosz2 Logo Mobile" class="visible-xs">
 
                 </a>
 
