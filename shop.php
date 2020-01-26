@@ -34,13 +34,13 @@
 
             <div id="products" class="row">
 
-            <?php getProducts(); ?>
+                <?php getProducts(); ?>
 
             </div>
             <center>
                 <ul class="pagination">
                 
-                    <?php getPaginator(); ?>
+                <?php getPaginator(); ?>
                 
                 </ul>
             </center>
