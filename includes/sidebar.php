@@ -1,3 +1,65 @@
+<?php
+
+$aMan = array();
+$aCat = array();
+$aPcat = array();
+
+// manufacturers
+
+if(isset($_REQUEST['man'])&&is_array($_REQUEST['man'])){
+    
+    foreach($_REQUEST['man'] as $sKeys=>$sVal){
+        
+        if((int)$sVal!=0){
+            
+            $aMan[(int)$sVal] = (int)$sVal;
+            
+        }
+        
+    }
+    
+}
+
+// manufacturers end
+
+// categories
+
+if(isset($_REQUEST['cat'])&&is_array($_REQUEST['cat'])){
+    
+    foreach($_REQUEST['cat'] as $sKeys=>$sVal){
+        
+        if((int)$sVal!=0){
+            
+            $aCat[(int)$sVal] = (int)$sVal;
+            
+        }
+        
+    }
+    
+}
+
+// categories end
+
+// product_categories
+
+if(isset($_REQUEST['p_cat'])&&is_array($_REQUEST['p_cat'])){
+    
+    foreach($_REQUEST['p_cat'] as $sKeys=>$sVal){
+        
+        if((int)$sVal!=0){
+            
+            $aPcat[(int)$sVal] = (int)$sVal;
+            
+        }
+        
+    }
+    
+}
+
+// product_categories end
+
+?>
+
 <!-- Panel Manufacturer -->
 <div class="panel panel-default sidebar-menu">
     <div class="panel-heading">
@@ -7,7 +69,7 @@
 
             <div class="pull-right">
 
-                <a href="#" style="color:black;">
+                <a href="JavaScript:Void(0);" style="color:black;">
 
                     <span class="nav-toggle hide-show">
 
@@ -140,7 +202,7 @@
 
             <div class="pull-right">
 
-                <a href="#" style="color:black;">
+                <a href="JavaScript:Void(0);" style="color:black;">
 
                     <span class="nav-toggle hide-show">
 
@@ -171,14 +233,12 @@
             </div>
         </div>
 
-    </div>
+        <!-- Panel Body 2 -->
+        <div class="panel-body scroll-menu">
 
-    <!-- Panel Body 2 -->
-    <div class="panel-body scroll-menu">
+            <ul class="nav nav-pills nav-stacked category-menu" id="dev-p-cat">
 
-        <ul class="nav nav-pills nav-stacked category-menu" id="dev-p-cat">
-
-            <?php 
+                <?php 
                 
                 $get_cat = "select * from categories where cat_top='yes'";
                 $run_cat = mysqli_query($con,$get_cat);
@@ -261,7 +321,8 @@
                 }
                 
                 ?>
-        </ul>
+            </ul>
+        </div>
     </div>
 </div>
 <!-- Panel Categories End -->
