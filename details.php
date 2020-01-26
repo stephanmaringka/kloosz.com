@@ -19,21 +19,42 @@ if(isset($_GET['pro_id'])){
     
     $run_product = mysqli_query($con,$get_product);
     
-    $row_product = mysqli_fetch_array($run_product);
+    $row_products = mysqli_fetch_array($run_product);
     
-    $p_cat_id = $row_product['p_cat_id'];
+    $p_cat_id = $row_products['p_cat_id'];
     
-    $pro_title = $row_product['product_title'];
+    $pro_title = $row_products['product_title'];
     
-    $pro_price = $row_product['product_price'];
+    $pro_price = $row_products['product_price'];
     
-    $pro_desc = $row_product['product_desc'];
+    $pro_sale_price = $row_products['product_sale'];
     
-    $pro_img1 = $row_product['product_img1'];
+    $pro_desc = $row_products['product_desc'];
     
-    $pro_img2 = $row_product['product_img2'];
+    $pro_img1 = $row_products['product_img1'];
     
-    $pro_img3 = $row_product['product_img3'];
+    $pro_img2 = $row_products['product_img2'];
+    
+    $pro_img3 = $row_products['product_img3'];
+    
+    $pro_label = $row_products['product_label'];
+    
+    if($pro_label == ""){
+            
+        }else{
+            
+            $product_label = "
+            
+                <a href='#' class='label $pro_label'>
+                
+                    <div class='theLabel'> $pro_label </div>
+                    <div class='labelBackground'>  </div>
+                
+                </a>
+            
+            ";
+            
+        }
     
     $get_p_cat = "select * from product_categories where p_cat_id='$p_cat_id'";
     
@@ -266,24 +287,14 @@ if(isset($_GET['pro_id'])){
                    </li>
                    
                    <li>
-                       <a href="shop.php?p_cat=<?php echo $p_cat_id; ?>"></a>
+                       <a href="shop.php?p_cat=<?php echo $p_cat_id; ?>"> <?php echo $p_cat_title ?></a>
                    </li>
-                   <li>  </li>
+                   <li> <?php echo $pro_title ?> </li>
                </ul>
                
            </div>
            
-           <div class="col-md-3">
-   
-   <?php 
-    
-    include("includes/sidebar.php");
-    
-    ?>
-               
-           </div>
-           
-           <div class="col-md-9">
+           <div class="col-md-12">
                <div id="productMain" class="row">
                    <div class="col-sm-6">
                        <div id="mainImage">
@@ -313,11 +324,14 @@ if(isset($_GET['pro_id'])){
                                
                                <a href="#myCarousel" class="right carousel-control" data-slide="next">
                                    <span class="glyphicon glyphicon-chevron-right"></span>
-                                   <span class="sr-only">Previous</span>
+                                   <span class="sr-only">Next</span>
                                </a>
                                
                            </div>
                        </div>
+                       
+                           <?php echo $product_label ?>
+                       
                    </div>
                    
                    <div class="col-sm-6">
@@ -360,7 +374,37 @@ if(isset($_GET['pro_id'])){
                                    </div>
                                </div>
                                
-                               <p class="price">Rp <?php echo $pro_price; ?></p>
+                               <?php
+                               
+                               if($pro_label == "sale"){
+                                   
+                                   echo "
+                                   
+                                        <p class='price'>
+
+                                            <del>Rp $pro_price</del><br/>
+
+                                            Rp $pro_sale_price
+
+                                        </p>
+                                    
+                                    ";
+
+                                }else{
+                                   
+                                   echo "
+
+                                    <p class='price'>
+
+                                            Rp $pro_price
+
+                                        </p>
+                                    
+                                    ";
+
+                                }
+                               
+                               ?>
                                
                                <p class="text-center buttons"><button class="btn btn-primary i fa fa-shopping-cart"> Add to cart</button></p>
                                
