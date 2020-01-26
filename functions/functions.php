@@ -67,7 +67,7 @@ function getPro(){
     
     global $db;
     
-    $get_products = "select * from products order by 1 DESC LIMIT 0,8";
+    $get_products = "select * from products order by 1 DESC LIMIT 0,12";
     
     $run_products = mysqli_query($db,$get_products);
     
@@ -79,7 +79,53 @@ function getPro(){
         
         $pro_price = $row_products['product_price'];
         
+        $pro_sale_price = $row_products['product_sale'];
+        
         $pro_img1 = $row_products['product_img1'];
+        
+        $pro_label = $row_products['product_label'];
+        
+        $manufacturer_id = $row_products['manufacturer_id'];
+        
+        $get_manufacturer = "select * from manufacturers where manufacturer_id='$manufacturer_id'";
+        
+        $run_manufacturer = mysqli_query($db,$get_manufacturer);
+        
+        $row_manufacturer = mysqli_fetch_array($run_manufacturer);
+        
+        $manufacturer_title = $row_manufacturer['manufacturer_title'];
+        
+        if($pro_label == "sale"){
+            
+            $product_price = " <del> Rp $pro_price </del> ";
+            
+            $product_sale_price = "/ Rp $pro_sale_price ";
+            
+        }else{
+            
+            $product_price = " Rp $pro_price ";
+            
+            $product_sale_price = "";
+            
+        }
+        
+        
+        if($pro_label == ""){
+            
+        }else{
+            
+            $product_label = "
+            
+                <a href='#' class='label $pro_label'>
+                
+                    <div class='theLabel'> $pro_label </div>
+                    <div class='labelBackground'>  </div>
+                
+                </a>
+            
+            ";
+            
+        }
         
         echo "
         
@@ -89,6 +135,13 @@ function getPro(){
                     <img class='img-responsive' src='admin_area/product_images/$pro_img1'>
                 </a>
                 <div class='text'>
+                
+                <center>
+                
+                    <p class='btn btn-primary'> $manufacturer_title <p/>
+                
+                </center>    
+                
                     <h3>
                         <a href='details.php?pro_id=$pro_id'>
                             $pro_title
@@ -97,7 +150,7 @@ function getPro(){
                     
                     <p class='price'>
                     
-                        Rp $pro_price
+                        $product_price &nbsp;$product_sale_price
                     
                     </p>
                     
@@ -113,6 +166,9 @@ function getPro(){
                     </p>
                     
                 </div>
+                
+                $product_label
+                
             </div>
         </div>
         
@@ -334,46 +390,105 @@ function getProducts(){
     while($row_products=mysqli_fetch_array($run_products)){
         
         $pro_id = $row_products['product_id'];
+        
         $pro_title = $row_products['product_title'];
+        
         $pro_price = $row_products['product_price'];
+        
+        $pro_sale_price = $row_products['product_sale'];
+        
         $pro_img1 = $row_products['product_img1'];
+        
+        $pro_label = $row_products['product_label'];
+        
+        $manufacturer_id = $row_products['manufacturer_id'];
+        
+        $get_manufacturer = "select * from manufacturers where manufacturer_id='$manufacturer_id'";
+        
+        $run_manufacturer = mysqli_query($db,$get_manufacturer);
+        
+        $row_manufacturer = mysqli_fetch_array($run_manufacturer);
+        
+        $manufacturer_title = $row_manufacturer['manufacturer_title'];
+        
+        if($pro_label == "sale"){
+            
+            $product_price = " <del> Rp $pro_price </del> ";
+            
+            $product_sale_price = "/ Rp $pro_sale_price ";
+            
+        }else{
+            
+            $product_price = " Rp $pro_price ";
+            
+            $product_sale_price = "";
+            
+        }
+        
+        
+        if($pro_label == ""){
+            
+        }else{
+            
+            $product_label = "
+            
+                <a href='#' class='label $pro_label'>
+                
+                    <div class='theLabel'> $pro_label </div>
+                    <div class='labelBackground'>  </div>
+                
+                </a>
+            
+            ";
+            
+        }
         
         echo "
         
-            <div class='col-md-4 col-sm-6 center-responsive'>
-            
-                <div class='product'>
+        <div class='col-md-4 col-sm-6 center-responsive'>
+            <div class='product'>
+                <a href='details.php?pro_id=$pro_id'>
+                    <img class='img-responsive' src='admin_area/product_images/$pro_img1'>
+                </a>
+                <div class='text'>
                 
-                    <a href='details.php?pro_id=$pro_id'>
-                    
-                        <img class='img-responsive' src='admin_area/product_images/$pro_img1'>
-                    
-                    </a>
-                    
-                    <div class='text'>
-                    
-                        <h3> $pro_title </h3>
-                        
-                        <p class='price'> Rp $pro_price </p>
-                        <p class='button'> 
-                        
-                            <a class='btn btn-default' href='details.php?pro_id=$pro_id'> View Details </a>
-                            <a class='btn btn-primary' href='details.php?pro_id=$pro_id'>
-                            
-                                Add to Cart <i class='fa fa-shopping-cart'></i>
-                            
-                            </a>
-                        
-                        </p>
-                    
-                    </div>
+                <center>
                 
+                    <p class='btn btn-primary'> $manufacturer_title <p/>
+                
+                </center>    
+                
+                    <h3>
+                        <a href='details.php?pro_id=$pro_id'>
+                            $pro_title
+                        </a>
+                    </h3>
+                    
+                    <p class='price'>
+                    
+                        $product_price &nbsp;$product_sale_price
+                    
+                    </p>
+                    
+                    <p class='button'>
+                    
+                        <a class='btn btn-defaul' href='details.php?pro_id=$pro_id'>
+                            View Details 
+                        </a>
+                        
+                        <a class='btn btn-primary' href='details.php?pro_id=$pro_id'>
+                            <i class='fa fa-shopping-cart'></i> Add to Cart
+                        </a>
+                    </p>
+                    
                 </div>
-            
+                
+                $product_label
+                
             </div>
+        </div>
         
         ";
-        
     }
     
 }
