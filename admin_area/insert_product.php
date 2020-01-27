@@ -8,7 +8,6 @@
 
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,51 +20,76 @@
 </head>
 
 <body>
-    
+
     <!-- row -->
     <div class="row">
+
         <div class="col-lg-12">
+
             <ol class="breadcrumb">
+
                 <li class="active">
+
                     <i class="fa fa-dashboard"></i> Dashboard / Insert Products
+
                 </li>
+
             </ol>
+
         </div>
+
     </div>
     <!-- row end -->
 
     <!-- row -->
     <div class="row">
+       
         <div class="col-lg-12">
+           
             <div class="panel panel-default">
+               
                 <div class="panel-heading">
+                   
                     <h3 class="panel-title">
+                       
                         <i class="fa fa-money fa-fw"></i> Insert Product
+                        
                     </h3>
+                    
                 </div>
-                
+
                 <!-- panel body -->
                 <div class="panel-body">
+                   
                     <form method="post" class="form-horizontal" enctype="multipart/form-data">
-                       
+
                         <!-- form group product title -->
                         <div class="form-group">
-                            <label class="col-md-3 control-label">
+                           
+                                <label class="col-md-3 control-label">
                                 Product Title
-                            </label>
+                                </label>
+                            
                             <div class="col-md-6">
+                                
                                 <input name="product_title" type="text" class="form-control" required>
+                                
                             </div>
+                            
                         </div>
                         <!-- form group product title end -->
-                        
+
                         <!-- form group manufacturer -->
                         <div class="form-group">
+                           
                             <label class="col-md-3 control-label">
                                 Manufacturer
                             </label>
+                            
                             <div class="col-md-6">
+                               
                                 <select name="manufacturer" class="form-control">
+                                   
                                     <option selected disabled>Select a Manufacturer</option>
 
                                     <?php 
@@ -90,14 +114,18 @@
                             </div>
                         </div>
                         <!-- form group manufacturer end -->
-                        
+
                         <!-- form group product category -->
                         <div class="form-group">
+                           
                             <label class="col-md-3 control-label">
                                 Product Category
                             </label>
+                            
                             <div class="col-md-6">
+                               
                                 <select name="product_cat" class="form-control">
+                                   
                                     <option selected disabled>Select a Product Category</option>
 
                                     <?php 
@@ -119,17 +147,23 @@
                                 
                                 ?>
                                 </select>
+                                
                             </div>
+                            
                         </div>
                         <!-- form group product category end -->
 
                         <!-- form group category -->
                         <div class="form-group">
+                           
                             <label class="col-md-3 control-label">
                                 Category
                             </label>
+                            
                             <div class="col-md-6">
+                               
                                 <select name="cat" class="form-control">
+                                   
                                     <option selected disabled>Select a Category</option>
 
                                     <?php 
@@ -153,101 +187,169 @@
                                     ?>
 
                                 </select>
+                                
                             </div>
+                            
                         </div>
                         <!-- form group category end -->
-                        
-                        <!-- form group -->
+
+                        <!-- form group img1 -->
                         <div class="form-group">
+                           
                             <label class="col-md-3 control-label">
                                 Product Image 1
                             </label>
+                            
                             <div class="col-md-6">
+                               
                                 <input name="product_img1" type="file" class="form-control" required>
+                                
                             </div>
+                            
                         </div>
-                        <!-- form group end -->
-                        
-                        <!-- form group -->
+                        <!-- form group img1 end -->
+
+                        <!-- form group img2 -->
                         <div class="form-group">
+                           
                             <label class="col-md-3 control-label">
                                 Product Image 2
                             </label>
+                            
                             <div class="col-md-6">
+                               
                                 <input name="product_img2" type="file" class="form-control">
+                                
                             </div>
+                            
                         </div>
-                        <!-- form group end -->
-                        
-                        <!-- form group -->
+                        <!-- form group img2 end -->
+
+                        <!-- form group img3 -->
                         <div class="form-group">
+                           
                             <label class="col-md-3 control-label">
                                 Product Image 3
                             </label>
+                            
                             <div class="col-md-6">
+                               
                                 <input name="product_img3" type="file" class="form-control">
+                                
                             </div>
+                            
                         </div>
-                        <!-- form group end -->
-                        
-                        <!-- form group -->
+                        <!-- form group img3 end -->
+
+                        <!-- form group pro price -->
                         <div class="form-group">
+                           
                             <label class="col-md-3 control-label">
                                 Product Price
                             </label>
+                            
                             <div class="col-md-6">
+                               
                                 <input name="product_price" type="text" class="form-control" required>
+                                
                             </div>
+                            
                         </div>
-                        <!-- form group end -->
-                        
-                        <!-- form group -->
+                        <!-- form group pro price end -->
+
+                        <!-- form group sale -->
                         <div class="form-group">
+                           
+                            <label class="col-md-3 control-label">
+                                Sale Price
+                            </label>
+                            
+                            <div class="col-md-6">
+                               
+                                <input name="product_sale" type="text" class="form-control">
+                                
+                            </div>
+                            
+                        </div>
+                        <!-- form group sale end -->
+
+                        <!-- form group keywords -->
+                        <div class="form-group">
+                           
                             <label class="col-md-3 control-label">
                                 Product Keywords
                             </label>
+                            
                             <div class="col-md-6">
+                               
                                 <input name="product_keywords" type="text" class="form-control" required>
+                                
                             </div>
+                            
                         </div>
-                        <!-- form group end -->
-                        
-                        <!-- form group -->
+                        <!-- form group keywords end -->
+
+                        <!-- form group desc -->
                         <div class="form-group">
+                           
                             <label class="col-md-3 control-label">
                                 Product Desc
                             </label>
+                            
                             <div class="col-md-6">
+                               
                                 <textarea name="product_desc" cols="19" rows="6" class="form-control"></textarea>
+                                
                             </div>
+                            
                         </div>
-                        <!-- form group end -->
-                        
+                        <!-- form group desc end -->
+
+                        <div class="form-group">
+                           
+                            <label class="col-md-3 control-label">
+                                Product Label
+                            </label>
+                            
+                            <div class="col-md-6">
+                               
+                                <input name="product_label" type="text" class="form-control">
+                                
+                            </div>
+                            
+                        </div>
+
                         <!-- form group -->
                         <div class="form-group">
+                           
                             <label class="col-md-3 control-label"></label>
+                            
                             <div class="col-md-6">
+                               
                                 <input name="submit" value="Insert Product" type="submit" class="btn btn-primary form-control">
+                                
                             </div>
+                            
                         </div>
+                        
                         <!-- form group end -->
                     </form>
+                    
                 </div>
                 <!-- panel body end -->
+                
             </div>
+            
         </div>
+        
     </div>
     <!-- row end -->
 
 
-    <script src="js/jquery-331.min.js"></script>
-    <script src="js/bootstrap-337.min.js"></script>
+    <!-- <script src="js/jquery-331.min.js"></script>
+    <script src="js/bootstrap-337.min.js"></script> -->
     <script src="js/tinymce/tinymce.min.js"></script>
-    <script>
-        tinymce.init({
-            selector: 'textarea'
-        });
-    </script>
+    <script>tinymce.init({selector:'textarea'});</script>
 </body>
 
 </html>
@@ -256,6 +358,7 @@
 <?php 
 
 if(isset($_POST['submit'])){
+    
     $product_title = $_POST['product_title'];
     $product_cat = $_POST['product_cat'];
     $cat = $_POST['cat'];
@@ -263,6 +366,8 @@ if(isset($_POST['submit'])){
     $product_price = $_POST['product_price'];
     $product_keywords = $_POST['product_keywords'];
     $product_desc = $_POST['product_desc'];
+    $product_sale = $_POST['product_sale'];
+    $product_label = $_POST['product_label'];
     
     $product_img1 = $_FILES['product_img1']['name'];
     $product_img2 = $_FILES['product_img2']['name'];
@@ -276,7 +381,7 @@ if(isset($_POST['submit'])){
     move_uploaded_file($temp_name2,"product_images/$temp_name2");
     move_uploaded_file($temp_name3,"product_images/$temp_name3");
     
-    $insert_product = "insert into products (p_cat_id,cat_id,manufacturer_id,date,product_title,product_img1,product_img2,product_img3,product_price,product_keywords,product_desc) values('$product_cat','$cat','$manufacturer_id',NOW(),'$product_title','$product_img1','$product_img2','$product_img3','$product_price','$product_keywords','$product_desc')";
+    $insert_product = "insert into products (p_cat_id,cat_id,manufacturer_id,date,product_title,product_img1,product_img2,product_img3,product_price,product_keywords,product_desc,product_label,product_sale) values ('$product_cat','$cat','$manufacturer_id',NOW(),'$product_title','$product_img1','$product_img2','$product_img3','$product_price','$product_keywords','$product_desc','$product_label','$product_sale')";
     
     $run_product = mysqli_query($con,$insert_product);
     
