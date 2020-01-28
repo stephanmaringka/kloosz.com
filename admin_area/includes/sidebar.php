@@ -218,6 +218,25 @@ if(!isset($_SESSION['admin_email'])){
             <li>
                 <a href="#" data-toggle="collapse" data-target="#terms">
                         
+                        <i class="fa fa-fw fa-book"></i> Coupons
+                        <i class="fa fa-fw fa-caret-down"></i>
+                        
+                </a>
+                
+                <ul id="terms" class="collapse">
+                    <li>
+                        <a href="index.php?insert_coupon"> Insert Coupons </a>
+                    </li>
+                    <li>
+                        <a href="index.php?view_coupons"> View Coupons </a>
+                    </li>
+                </ul>
+                
+            </li>
+            
+            <li>
+                <a href="#" data-toggle="collapse" data-target="#terms">
+                        
                         <i class="fa fa-fw fa-table"></i> Terms
                         <i class="fa fa-fw fa-caret-down"></i>
                         
