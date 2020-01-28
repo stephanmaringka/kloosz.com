@@ -75,6 +75,8 @@
                                        
                                      $pro_qty = $row_cart['qty'];
                                        
+                                     $pro_sale = $row_cart['p_price'];
+                                       
                                        $get_products = "select * from products where product_id='$pro_id'";
                                        
                                        $run_products = mysqli_query($con,$get_products);
@@ -87,7 +89,11 @@
                                            
                                            $only_price = $row_products['product_price'];
                                            
-                                           $sub_total = $row_products['product_price']*$pro_qty;
+                                           $pro_url = $row_products['product_url'];
+                                           
+                                           $sub_total = $pro_sale*$pro_qty;
+                                           
+                                           $_SESSION['pro_qty'] = $pro_qty;
                                            
                                            $total += $sub_total;
                                            
@@ -103,19 +109,19 @@
                                        
                                        <td>
                                            
-                                           <a href="details.php?pro_id=<?php echo $pro_id; ?>"> <?php echo $product_title; ?> </a>
+                                           <a href="<?php echo $pro_url; ?>"> <?php echo $product_title; ?> </a>
                                            
                                        </td>
                                        
                                        <td>
                                           
-                                           <?php echo $pro_qty; ?>
+                                           <input type="number" name="quantity" data-product_id="<?php echo $pro_id; ?>" value="<?php  echo $_SESSION['pro_qty']; ?>" class="quantity form-control">
                                            
                                        </td>
                                        
                                        <td>
                                            
-                                           <?php echo $only_price; ?>
+                                           <?php echo $pro_sale; ?>
                                            
                                        </td>
                                        
@@ -156,6 +162,16 @@
                                
                            </table>
                            
+                           <div class="form-inline pull-right">
+                               <div class="form-group">
+                                   
+                                   <label> Coupon Code: </label>
+                                   <input type="text" name="" class="form-control">
+                                   <input type="submit" class="btn btn-primary" value="Use Coupon" name="apply_coupon">
+                                   
+                               </div>
+                           </div>
+                           
                        </div>
                        
                        <div class="box-footer">
@@ -193,6 +209,69 @@
                </div>
                
                <?php 
+               
+                    if(isset($_POST['apply_coupon'])){
+
+                        $code = $_POST['code'];
+
+                        if($code == ""){
+
+                        }else{
+
+                            $get_coupons = "select * from coupons where coupon_code='$code'";
+                            $run_coupons = mysqli_query($con,$get_coupons);
+                            $check_coupons = mysqli_num_rows($run_coupons);
+
+                            if($check_coupons == "1"){
+
+                                $row_coupons = mysqli_fetch_array($run_coupons);
+
+                                $coupon_pro_id = $row_coupons['product_id'];
+                                $coupon_price = $row_coupons['coupon_price'];
+                                $coupon_limit = $row_coupons['coupon_limit'];
+                                $coupon_used = $row_coupons['coupon_used'];
+
+                                if($coupon_limit == $coupon_used){
+
+                                    echo "<script>alert('Your Coupon Already Expired')</script>";
+
+                                }else{
+
+                                    $get_cart = "select * from cart where p_id='$coupon_pro_id' AND ip_add='$ip_add'";
+                                    $run_cart = mysqli_query($con,$get_cart);
+                                    $check_cart = mysqli_num_rows($run_cart);
+
+                                    if($check_cart == "1"){
+
+                                        $add_used = "update coupons set coupon_used=coupon_used+1 where coupon_code='$code'";
+                                        $run_used = mysqli_query($con,$add_used);
+                                        $update_cart = "update cart set p_price='$coupon_price' where p_id='$coupon_pro_id' AND ip_add='$ip_add'";
+                                        $run_update_cart = mysqli_query($con,$update_cart);
+
+                                        echo "<script>alert('Your Coupon Has Been Applied')</script>";
+                                        echo "<script>window.open('cart.php','_self')</script>";
+
+                                    }else{
+
+                                        echo "<script>alert('Your Coupon Didnt Match With Your Product On Your Cart')</script>";
+
+                                    }
+
+                                }
+
+                            }else{
+
+                                echo "<script>alert('You Coupon Is Not Valid')</script>";
+
+                            }
+
+                        }
+
+                    }
+               
+               ?>
+               
+                    <?php 
                
                 function update_cart(){
                     
@@ -238,32 +317,107 @@
                    while($row_products=mysqli_fetch_array($run_products)){
                        
                        $pro_id = $row_products['product_id'];
+        
+                    $pro_title = $row_products['product_title'];
+
+                    $pro_price = $row_products['product_price'];
+
+                    $pro_sale_price = $row_products['product_sale'];
                        
-                       $pro_title = $row_products['product_title'];
-                       
-                       $pro_price = $row_products['product_price'];
-                       
-                       $pro_img1 = $row_products['product_img1'];
-                       
-                       echo "
-                       
-                    <div class='col-md-3 col-sm-6 center-responsive'><!-- col-md-3 col-sm-6 center-responsive Begin -->
-                       <div class='product same-height'><!-- product same-height Begin -->
-                           <a href='details.php?pro_id=$pro_id'>
-                               <img class='img-responsive' src='admin_area/product_images/$pro_img1' alt='Product 6'>
+                    $pro_url = $row_products['product_url'];
+
+                    $pro_img1 = $row_products['product_img1'];
+
+                    $pro_label = $row_products['product_label'];
+
+                    $manufacturer_id = $row_products['manufacturer_id'];
+
+                    $get_manufacturer = "select * from manufacturers where manufacturer_id='$manufacturer_id'";
+        
+                    $run_manufacturer = mysqli_query($db,$get_manufacturer);
+
+                    $row_manufacturer = mysqli_fetch_array($run_manufacturer);
+
+                    $manufacturer_title = $row_manufacturer['manufacturer_title'];
+        
+                    if($pro_label == "sale"){
+
+                        $product_price = " <del> Rp $pro_price </del> ";
+
+                        $product_sale_price = "/ Rp $pro_sale_price ";
+
+                    }else{
+
+                        $product_price = " Rp $pro_price ";
+
+                        $product_sale_price = "";
+
+                    }
+
+
+                    if($pro_label == ""){
+
+                    }else{
+
+                        $product_label = "
+
+                            <a href='#' class='label $pro_label'>
+
+                                <div class='theLabel'> $pro_label </div>
+                                <div class='labelBackground'>  </div>
+
                             </a>
-                            
-                            <div class='text'><!-- text Begin -->
-                                <h3><a href='details.php?pro_id=$pro_id'> $pro_title </a></h3>
-                                
-                                <p class='price'>Rp $pro_price</p>
-                                
-                            </div><!-- text Finish -->
-                            
-                        </div><!-- product same-height Finish -->
-                   </div><!-- col-md-3 col-sm-6 center-responsive Finish -->
-                   
-                       ";
+
+                        ";
+
+                    }
+        
+                    echo "
+
+                    <div class='col-md-3 col-sm-6 center-responsive'>
+                        <div class='product'>
+                            <a href='details.php?pro_id=$pro_url'>
+                                <img class='img-responsive' src='admin_area/product_images/$pro_img1'>
+                            </a>
+                            <div class='text'>
+
+                            <center>
+
+                                <p class='btn btn-primary'> $manufacturer_title <p/>
+
+                            </center>    
+
+                                <h3>
+                                    <a href='details.php?pro_id=$pro_url'>
+                                        $pro_title
+                                    </a>
+                                </h3>
+
+                                <p class='price'>
+
+                                    $product_price &nbsp;$product_sale_price
+
+                                </p>
+
+                                <p class='button'>
+
+                                    <a class='btn btn-defaul' href='details.php?pro_id=$pro_url'>
+                                        View Details 
+                                    </a>
+
+                                    <a class='btn btn-primary' href='details.php?pro_id=$pro_url'>
+                                        <i class='fa fa-shopping-cart'></i> Add to Cart
+                                    </a>
+                                </p>
+
+                            </div>
+
+                            $product_label
+
+                        </div>
+                    </div>
+
+                    ";
                        
                    }
                    
@@ -344,6 +498,38 @@
     
     <script src="js/jquery-331.min.js"></script>
     <script src="js/bootstrap-337.min.js"></script>
+    
+    <script>
+
+        $(document).ready(function(){
+           
+            $(document).on('keyup','.quantity',function(){
+               
+                var id = $ (this).data("product_id");
+                var quantity = $(this).val();
+                
+                if(quantity !=''){
+                    
+                    $.ajax({
+                        
+                       url: "change.php",
+                       method: "POST",
+                        data:{id:id, quantity:quantity},
+                        
+                        success:function(){
+                            $("body").load("cart_body.php");
+                        }
+                       
+                        
+                    });
+                    
+                }
+                
+            });
+            
+        });
+
+    </script>
     
     
 </body>
