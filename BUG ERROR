@@ -1,3 +1,4 @@
+Web
 1. Cart> Ga konek per user. Setelah user logout, cart ga hilang, masih tetap ada.
 			    login user baru cart dari user sebelumnya tetap ada"
 2. Cart / My Account / My Orders / Checkout> Ga bisa beli barang yang sama 2x. kalo uda di cart, ga bisa beli barang yang sama lagi.
@@ -7,6 +8,6 @@
 4. Shop> Kondisi logout bisa add product to cart		
 5. Subscribe> Masih di off in, rencana mau di take off
 
-
+Admin_Panel
 1. Edit Product> kloosz/admin_area/edit_product.php> "Setelah update, image ga ke ganti. Selain image semua normal
 Kayaknya ada typo di function"
